@@ -4,19 +4,23 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import edu.uoc.pac3.R
 
-class StreamsActivity : AppCompatActivity() {
+class StreamsActivity : AppCompatActivity()
+{
 
     private val TAG = "StreamsActivity"
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_streams)
+
         // Init RecyclerView
         initRecyclerView()
         // TODO: Get Streams
     }
 
-    private fun initRecyclerView() {
+    private fun initRecyclerView()
+    {
         // TODO: Implement
     }
 
