@@ -30,8 +30,7 @@ class TwitchApiService(private val httpClient: HttpClient)
     /// Gets Access and Refresh Tokens on Twitch
     suspend fun getTokens(authorizationCode: String): OAuthAccessTokenResponse?
     {
-        //TODO("Get Tokens from Twitch")
-
+        // Get Tokens from Twitch"
         val response = httpClient.post<OAuthAccessTokenResponse>("https://id.twitch.tv/oauth2/token")
         {
             parameter("client_id", clientID)
@@ -41,7 +40,7 @@ class TwitchApiService(private val httpClient: HttpClient)
             parameter("redirect_uri", redirectUri)
         }
 
-        Log.d("OAuth", "Access Token: ${response.accessToken}. Refresh Token: ${response.refreshToken}")
+        Log.d(TAG, "Access Token: ${response.accessToken}. Refresh Token: ${response.refreshToken}")
 
         return response
     }
@@ -52,11 +51,6 @@ class TwitchApiService(private val httpClient: HttpClient)
     {
         TODO("Get Streams from Twitch")
         TODO("Support Pagination")
-    }
-
-    fun sayHello()
-    {
-        Log.i(TAG,"HEEEEEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOOOO")
     }
 
     /// Gets Current Authorized User on Twitch

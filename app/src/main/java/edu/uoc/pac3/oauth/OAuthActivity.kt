@@ -1,6 +1,5 @@
 package edu.uoc.pac3.oauth
 
-import android.net.Network
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -14,15 +13,13 @@ import edu.uoc.pac3.R
 import edu.uoc.pac3.data.SessionManager
 import edu.uoc.pac3.data.TwitchApiService
 import edu.uoc.pac3.data.network.Network.createHttpClient
-import edu.uoc.pac3.data.oauth.OAuthAccessTokenResponse
 import edu.uoc.pac3.data.oauth.OAuthConstants.authorizationUrl
 import edu.uoc.pac3.data.oauth.OAuthConstants.clientID
 import edu.uoc.pac3.data.oauth.OAuthConstants.redirectUri
 import kotlinx.android.synthetic.main.activity_oauth.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.util.*
+import edu.uoc.pac3.data.oauth.OAuthAccessTokenResponse
 
 class OAuthActivity : AppCompatActivity()
 {
@@ -30,6 +27,7 @@ class OAuthActivity : AppCompatActivity()
     private val TAG = "OAuthActivity"
 
     private val uniqueState = UUID.randomUUID().toString()
+    lateinit var tokens : OAuthAccessTokenResponse
 
 
     override fun onCreate(savedInstanceState: Bundle?)
@@ -96,24 +94,24 @@ class OAuthActivity : AppCompatActivity()
         // Show Loading Indicator
         progressBar.visibility = View.VISIBLE
 
-        //Create Twitch Service
-        val TS= TwitchApiService(createHttpClient(this))
+        // Create Twitch Service
+        val twitchApiService = TwitchApiService(createHttpClient(this))
 
-        //Get Tokens from Twitch
-        lifecycle.coroutineScope.launch {val tokensitus = TS.getTokens(authorizationCode)}
+        // Create SessionManager
+        val sessionManager = SessionManager(this)
 
-        //Save access token and refresh token using the SessionManager class
-        val SM = SessionManager(this)
+        // Create a coroutine for get the tokens from Twitch and save them with SessionManager
+        lifecycle.coroutineScope.launch{
+            // Get Tokens from Twitch
+            tokens = twitchApiService.getTokens(authorizationCode)!!
 
-        SM.saveAccessToken("accesionano")
-        SM.saveRefreshToken("refreshittoooo")
+            // Save access token
+            sessionManager.saveAccessToken(tokens.accessToken)
+            Log.i(TAG,"El acces per guardar es: "+ tokens.accessToken)
 
-        val missatge1 = SM.getAccessToken()
-        Log.i(TAG,"El missatge es: "+missatge1)
-
-        val missatge2 = SM.getRefreshToken()
-        Log.i(TAG,"El missatge es: "+missatge2)
-        
+            // Save refresh token
+            tokens.refreshToken?.let { sessionManager.saveRefreshToken(it)
+                Log.i(TAG,"El refresh per guardar es: "+ tokens.refreshToken)}}
     }
 
 }
