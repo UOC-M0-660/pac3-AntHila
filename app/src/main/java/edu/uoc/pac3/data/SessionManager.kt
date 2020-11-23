@@ -2,28 +2,36 @@ package edu.uoc.pac3.data
 
 import android.content.Context
 import edu.uoc.pac3.R
+import io.ktor.client.request.HttpRequestBuilder
 
 /**
  * Created by alex on 06/09/2020.
  */
 
-class SessionManager(context: Context)
+class SessionManager(context:Context)
 {
-    val SHARED_NAME= "Mydtb"
+    val SHARED_NAME= "SharedPreferences"
     val SHARED_ACCESS_TOKEN = "accessToken"
     val SHARED_REFRESH_TOKEN = "refreshToken"
+    val SHARED_DEFAULT = ""
     val storage = context.getSharedPreferences(SHARED_NAME,0)
-     val context = context
+    val context = context
 
     fun isUserAvailable(): Boolean
     {
-        // TODO: Implement
-        return false
+        var result :Boolean = true
+
+        if(getAccessToken() != SHARED_DEFAULT)
+        {
+            result = true
+        }
+
+        return result
     }
 
     fun getAccessToken(): String?
     {
-        return storage.getString(SHARED_ACCESS_TOKEN, context.getString(R.string.acces_token_error)).toString()
+        return storage.getString(SHARED_ACCESS_TOKEN, SHARED_DEFAULT)
     }
 
     fun saveAccessToken(accessToken: String)
@@ -33,12 +41,12 @@ class SessionManager(context: Context)
 
     fun clearAccessToken()
     {
-        storage.edit().remove(SHARED_ACCESS_TOKEN).apply()
+        storage.edit().putString(SHARED_ACCESS_TOKEN,SHARED_DEFAULT).apply()
     }
 
     fun getRefreshToken(): String?
     {
-        return storage.getString(SHARED_REFRESH_TOKEN, context.getString(R.string.acces_token_error)).toString()
+        return storage.getString(SHARED_REFRESH_TOKEN, SHARED_DEFAULT)
     }
 
     fun saveRefreshToken(refreshToken: String)
@@ -48,7 +56,7 @@ class SessionManager(context: Context)
 
     fun clearRefreshToken()
     {
-        storage.edit().remove(SHARED_REFRESH_TOKEN).apply()
+        storage.edit().putString(SHARED_REFRESH_TOKEN,SHARED_DEFAULT).apply()
     }
 
 }

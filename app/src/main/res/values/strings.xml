@@ -23,7 +23,13 @@
     <string name="error_profile">Error getting Profile</string>
     <string name="error_profile_update">Error updating profile</string>
 
-    //Session Manager
+    //Session Manager messages
     <string name="acces_token_error">It is not possible to obtain the access token from shared preferences.</string>
     <string name="refresh_token_error">It is not possible to obtain the refresh token from shared preferences.</string>
+
+    //Stream list
+    <string name="title_example">UNO</string>
+    <string name="user_name_example">RESftiop</string>
+
+
 </resources>

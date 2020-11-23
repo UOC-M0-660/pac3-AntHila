@@ -1,15 +1,18 @@
 package edu.uoc.pac3.data.streams
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-/**
- * Created by alex on 07/09/2020.
- */
-
-data class Stream(
-    val userName: String? = null,
-    val title: String? = null,
+@Serializable
+data class Stream
+(
+        @SerialName("userName") val userName: String? = null,
+        @SerialName("title") val title: String? = null,
+        @SerialName("thumbnail_url") val thumbnail_url: String? =null
 )
 
-data class StreamsResponse(
-    val data: List<Stream>? = null,
+@Serializable
+data class StreamsResponse
+(
+        @SerialName("data") val data: List<Stream>? = null,
 )
