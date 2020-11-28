@@ -1,5 +1,6 @@
 package edu.uoc.pac3.oauth
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.coroutineScope
+import edu.uoc.pac3.LaunchActivity
 import edu.uoc.pac3.R
 import edu.uoc.pac3.data.SessionManager
 import edu.uoc.pac3.data.TwitchApiService
@@ -20,6 +22,7 @@ import kotlinx.android.synthetic.main.activity_oauth.*
 import kotlinx.coroutines.launch
 import java.util.*
 import edu.uoc.pac3.data.oauth.OAuthAccessTokenResponse
+import edu.uoc.pac3.twitch.streams.StreamsActivity
 
 class OAuthActivity : AppCompatActivity()
 {
@@ -111,7 +114,15 @@ class OAuthActivity : AppCompatActivity()
 
             // Save refresh token
             tokens.refreshToken?.let { sessionManager.saveRefreshToken(it)
-                Log.i(TAG,"El refresh per guardar es: "+ tokens.refreshToken)}}
+                Log.i(TAG,"El refresh per guardar es: "+ tokens.refreshToken)}
+
+            // User is available, open Streams Activity
+            startActivity(Intent(this@OAuthActivity, LaunchActivity::class.java))
+
+
+        }
+
+
     }
 
 }

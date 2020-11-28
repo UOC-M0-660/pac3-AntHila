@@ -1,7 +1,6 @@
 package edu.uoc.pac3
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import edu.uoc.pac3.data.streams.Stream
-import edu.uoc.pac3.twitch.streams.StreamsActivity
-import kotlin.coroutines.coroutineContext
 
 class StreamsListAdapter(val context: Context , private var streams: List<Stream>) : RecyclerView.Adapter<StreamsListAdapter.ViewHolder>()
 {
@@ -34,15 +31,7 @@ class StreamsListAdapter(val context: Context , private var streams: List<Stream
     {
 
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.stream_list_row, parent, false)
-        /*val view: View = when (viewType)
-        {
-            evenViewType -> {LayoutInflater.from(parent.context).inflate(R.layout.row_book_list_content_even, parent, false)}
-            oddViewType -> {LayoutInflater.from(parent.context).inflate(R.layout.row_book_list_content_odd, parent, false)}
-            else ->
-            {
-                throw IllegalStateException("Unsupported viewType $viewType")
-            }
-        }*/
+
         return ViewHolder(view)
     }
 
@@ -51,11 +40,14 @@ class StreamsListAdapter(val context: Context , private var streams: List<Stream
     {
         val stream = getStream(position)
         holder.titleView.text = stream.title
-        holder.userNameView.text = stream.userName
+        holder.userNameView.text = stream.user_name
+
+        val urlTwitchAdapter : URLTwitchAdapter = URLTwitchAdapter()
+        val thumbnailUrl = urlTwitchAdapter.adaptURL(stream.thumbnail_url)
 
         Glide
              .with(context)
-             .load(stream.thumbnail_url)
+             .load(thumbnailUrl)
              .fitCenter()
              .into(holder.thumbnailView)
 

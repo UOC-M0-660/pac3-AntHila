@@ -19,7 +19,7 @@ class SessionManager(context:Context)
 
     fun isUserAvailable(): Boolean
     {
-        var result :Boolean = true
+        var result :Boolean = false
 
         if(getAccessToken() != SHARED_DEFAULT)
         {

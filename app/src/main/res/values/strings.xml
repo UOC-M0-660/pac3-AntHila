@@ -28,8 +28,8 @@
     <string name="refresh_token_error">It is not possible to obtain the refresh token from shared preferences.</string>
 
     //Stream list
-    <string name="title_example">UNO</string>
-    <string name="user_name_example">RESftiop</string>
+    <string name="title_example">Walking with Pokemon GO!</string>
+    <string name="user_name_example">Charizard</string>
 
 
 </resources>

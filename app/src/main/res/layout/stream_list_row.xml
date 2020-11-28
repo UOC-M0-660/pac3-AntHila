@@ -17,8 +17,8 @@
         <!--Thumbnail-->
         <ImageView
             android:id="@+id/thumbnail_image"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars"

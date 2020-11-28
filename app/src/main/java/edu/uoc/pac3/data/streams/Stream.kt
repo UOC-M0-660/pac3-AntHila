@@ -6,9 +6,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Stream
 (
-        @SerialName("userName") val userName: String? = null,
-        @SerialName("title") val title: String? = null,
-        @SerialName("thumbnail_url") val thumbnail_url: String? =null
+    @SerialName("user_name") val user_name: String? = null,
+    @SerialName("title") val title: String? = null,
+    @SerialName("thumbnail_url") val thumbnail_url: String? =null
 )
 
 @Serializable
