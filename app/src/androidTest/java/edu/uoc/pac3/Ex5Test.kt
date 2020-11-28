@@ -27,7 +27,7 @@ class Ex5Test : TwitchTest() {
     @Test
     fun retrievesUserProfile() {
         runBlocking {
-            val user = twitchService.getUser()
+            val user = twitchService.getUsers()
             assert(user != null) {
                 "User cannot not be null"
             }

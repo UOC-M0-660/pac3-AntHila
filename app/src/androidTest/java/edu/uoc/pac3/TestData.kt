@@ -3,9 +3,8 @@ package edu.uoc.pac3
 import android.content.Context
 import edu.uoc.pac3.data.SessionManager
 import edu.uoc.pac3.data.TwitchApiService
-import edu.uoc.pac3.data.network.Endpoints
 import edu.uoc.pac3.data.network.Network
-import edu.uoc.pac3.data.oauth.OAuthTokensResponse
+import edu.uoc.pac3.data.oauth.OAuthAccessTokenResponse
 import io.ktor.client.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.delay
@@ -36,7 +35,7 @@ object TestData {
     // Token Refresh
     suspend fun setAccessToken(context: Context) {
         val response =
-            provideHttpClient(context).post<OAuthTokensResponse>("https://id.twitch.tv/oauth2/token") {
+            provideHttpClient(context).post<OAuthAccessTokenResponse>("https://id.twitch.tv/oauth2/token") {
                 parameter("client_id", "efwo35z4mgyiyhje8bbp73b98oyavf")
                 parameter("client_secret", "7fl44yqjm5tjdx73z45dd9ybwuuiez")
                 parameter("refresh_token", refreshToken)

@@ -1,10 +1,19 @@
 package edu.uoc.pac3.data.user
 
-/**
- * Created by alex on 07/09/2020.
- */
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-data class User(
-    val userName: String? = null,
-    val description: String? = null,
+@Serializable
+data class User
+(
+        @SerialName("display_name") val display_name: String? = null,
+        @SerialName("description") val description: String? = null,
+        @SerialName("profile_image_url") val profile_image_url: String? = null
+)
+
+
+@Serializable
+data class UsersResponse
+(
+        @SerialName("data") val data: List<User>? = null,
 )

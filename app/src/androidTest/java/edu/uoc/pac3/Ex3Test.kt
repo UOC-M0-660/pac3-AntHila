@@ -42,7 +42,7 @@ class Ex3Test : TwitchTest() {
         // Give some time for actual data to be loaded on RecyclerView
         Thread.sleep(TestData.networkWaitingMillis)
         // Check they are displayed in list
-        Espresso.onView(ViewMatchers.withText(streams.first().userName ?: ""))
+        Espresso.onView(ViewMatchers.withText(streams.first().user_name ?: ""))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         Espresso.onView(ViewMatchers.withText(streams.first().title ?: ""))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
