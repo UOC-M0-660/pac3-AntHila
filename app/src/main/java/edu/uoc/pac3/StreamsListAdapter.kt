@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import edu.uoc.pac3.data.streams.Stream
@@ -51,12 +52,9 @@ class StreamsListAdapter(val context: Context , private var streams: List<Stream
              .fitCenter()
              .into(holder.thumbnailView)
 
-        /*// Set View Click Listener
+        //Set View Click Listener
         holder.itemView.setOnClickListener{ view ->
-            val intent = Intent(view.context, BookDetailActivity::class.java).apply{
-                putExtra(BookDetailFragment.ARG_ITEM_ID, book.uid)}
-
-            view.context.startActivity(intent)}*/
+            Toast.makeText(context,R.string.TODO , Toast.LENGTH_SHORT).show()}
     }
 
     // Returns total items in Adapter

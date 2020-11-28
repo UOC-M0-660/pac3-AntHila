@@ -1,7 +1,11 @@
 package edu.uoc.pac3.twitch.streams
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +17,7 @@ import edu.uoc.pac3.data.TwitchApiService
 import edu.uoc.pac3.data.network.Network
 import edu.uoc.pac3.data.streams.Stream
 import edu.uoc.pac3.data.streams.StreamsResponse
+import edu.uoc.pac3.twitch.profile.ProfileActivity
 import kotlinx.coroutines.launch
 
 class StreamsActivity : AppCompatActivity()
@@ -54,15 +59,11 @@ class StreamsActivity : AppCompatActivity()
 
     private fun showTwitchStreams()
     {
-        Log.i(TAG,"Empieza showTwitchStreams")
-
         // Create Twitch Service
         val twitchApiService = TwitchApiService(Network.createHttpClient(this))
 
         // Create a coroutine for get the Streams from Twitch
         lifecycle.coroutineScope.launch{
-
-            Log.i(TAG,"Hemos entrado en la coroutine de showTwitchStreams")
 
             // Create SessionManager
             val sessionManager = SessionManager(this@StreamsActivity)
@@ -75,9 +76,7 @@ class StreamsActivity : AppCompatActivity()
 
             //Update UI
             streamsTwitchList?.data?.let { adapter.setStreams(it) }
-
         }
-
     }
 
     private fun showDefaultStreams()
@@ -99,6 +98,31 @@ class StreamsActivity : AppCompatActivity()
         Log.i(TAG,"Se acaba defaultStreams")
 
         return list
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean
+    {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean
+    {
+        // Handle action bar item clicks here.
+        val id = item.getItemId()
+
+        if (id == R.id.user_profile)
+        {
+            launchUserProfileActivity()
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    fun launchUserProfileActivity()
+    {
+        startActivity(Intent(this, ProfileActivity::class.java))
     }
 
 

@@ -31,5 +31,8 @@
     <string name="title_example">Walking with Pokemon GO!</string>
     <string name="user_name_example">Charizard</string>
 
+    //General
+    <string name="TODO">This feature is not implanted yet.</string>
+
 
 </resources>
