@@ -71,7 +71,7 @@
             android:text="@string/button_save_description" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/logoutButton"
+            android:id="@+id/logOutButton"
             style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
